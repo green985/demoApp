@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Demo MOBILLIUM</string>
+
+
+    <string name="allText">Tümü</string>
+    <string name="app_label">Demo Search</string>
+    <string name="tl_format">%d TL</string>
+    <string name="search_hint">Ürün veya Vitrin Ara</string>
+    <string name="product_format">%d ÜRÜN</string>
+    <string name="go_editor_shop_text_string">Vitrine Git</string>
+    <string name="error_text">Bir Sorun Oluştu. Lütfen tekrar deneyiniz.</string>
+    <string name="network_error_msg">Network Error</string>
+
+</resources>

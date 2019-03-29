@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00a4cd</color>
+    <color name="colorPrimaryDark">#00838f</color>
+    <color name="colorAccent">#00a4cd</color>
+    <color name="colorAccentDark">#00838f</color>
+    <color name="scrim">#33000000</color> <!-- 20% black -->
+    <color name="light_grey">#888888</color>
+    <color name="dark_gray">#ff808080</color>
+    <color name="progressRed">#ed1a23</color>
+    <color name="progressGray">#8b8b8b</color>
+    <color name="listGray">#eeeeee</color>
+    <color name="status_bar">#202124</color>
+    <color name="white">#ffffff</color>
+    <color name="product_price_background">#CFCFCF</color>
+    <color name="category_list_background">#D8D8D8</color>
+    <color name="collection_list_background">#D8D8D8</color>
+</resources>

@@ -1,0 +1,203 @@
+apply plugin: 'com.android.application'
+
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://maven.fabric.io/public' }
+    }
+}
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+ext.versionMajor = 1
+ext.versionMinor = 0
+ext.versionPatch = 0
+ext.minimumSdkVersion = versions.minSdk
+
+android {
+    compileSdkVersion versions.compiledSdk
+    defaultConfig {
+        applicationId "com.ei.mobilliumdemo"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode generateVersionCode()
+        versionName generateVersionName()
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        multiDexEnabled true
+    }
+
+    buildTypes.each {
+        it.buildConfigField('String', 'BASE_URL', BASE_URL)
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        incremental true
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    allprojects {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:-unchecked" << "-Xlint:deprecation" << "-Xdiags:verbose"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$versions.support_library"
+    implementation "com.android.support:support-v4:$versions.support_library"
+    implementation "com.android.support:design:$versions.support_library"
+    implementation "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
+    implementation "android.arch.lifecycle:common-java8:$versions.lifecycle"
+    // Paging
+    implementation "android.arch.paging:runtime:$versions.paging"
+    // Retrofit
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+    // Other parts
+    implementation "com.jakewharton.timber:timber:$versions.timber"
+    implementation "com.jakewharton.threetenabp:threetenabp:$versions.threetenabp"
+    //Shouldn't increase lib version due to omitting Fragment support
+    implementation "pub.devrel:easypermissions:$versions.easypermissions"
+    //noinspection GradleDependency
+    implementation "com.romandanylyk:pageindicatorview:$versions.indicator"
+    implementation "com.ncapdevi:frag-nav:$versions.fragnav"
+    implementation "com.github.ittianyu:BottomNavigationViewEx:$versions.bottom_nav"
+    implementation "org.jetbrains:annotations:$versions.jetbrains"
+    implementation "de.hdodenhof:circleimageview:$versions.circular_imageview"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:$versions.stetho"
+    implementation "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+    implementation "com.github.demoNo:AutoScrollViewPager:v$versions.viewPager"
+    implementation 'me.relex:circleindicator:1.2.2@aar'
+
+    // LeakCanary
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:support-v4:28.0.0'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leak_canary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leak_canary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leak_canary"
+
+    // Test
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "com.android.support.test:runner:$versions.runner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso_core"
+    implementation "com.android.support:recyclerview-v7:$versions.support_library"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+
+    //Gson
+    implementation "com.google.code.gson:gson:$versions.gson"
+
+    //permission
+    implementation "com.karumi:dexter:$versions.permission"
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
+
+    // Paging
+    implementation "android.arch.paging:runtime:$versions.paging"
+
+    // Other parts
+    implementation "org.jetbrains:annotations:$versions.jetbrains"
+    implementation "com.jakewharton.timber:timber:$versions.timber"
+    implementation "com.ncapdevi:frag-nav:$versions.fragnav"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    annotationProcessor "com.google.dagger:dagger-android-processor:$versions.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
+
+
+    implementation "com.android.support:design:$versions.support_library"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
+    implementation "android.arch.lifecycle:common-java8:$versions.lifecycle"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+    // Paging
+    implementation "android.arch.paging:runtime:$versions.paging"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$versions.glide"
+    implementation("com.github.bumptech.glide:okhttp3-integration:$versions.glide") {
+        exclude group: 'glide-parent'
+    }
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$versions.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:$versions.stetho"
+    implementation "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+
+    // Other parts
+    implementation "org.jetbrains:annotations:$versions.jetbrains"
+
+
+}
+
+/**
+ * Generates version code that is suitable for the Semantic Versioning
+ *
+ * @return a version code generated automatically
+ */
+private Integer generateVersionCode() {
+    return (ext.minimumSdkVersion + 2) * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
+}
+
+/**
+ * Generates version name that is suitable for the Semantic Versioning
+ *
+ * @return a version name generated automatically
+ */
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+    return versionName
+}
